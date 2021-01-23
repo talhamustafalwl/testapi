@@ -28,7 +28,10 @@ const ProductSchema = mongoose.Schema(
         type: String,
       },
       image:String,
-
+      addedToCart: {
+        type: Boolean,
+        default: false,
+      },
     status: { type: String },
   },
   { timestamps: true }

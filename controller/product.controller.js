@@ -7,7 +7,7 @@ class ProductController {
     try {
 
       // searchQuery(req.query, 'name', 'password', 'index')
-       Product.find({}  )
+       Product.find({} )
         .then((response) => {
           return res.status(200).json({
             success: true,
@@ -22,23 +22,54 @@ class ProductController {
           });
         })
         .catch((error) => {
+          console.log(error)
           return res.status(400).json({
             success: false,
             status: 400,
-            message: "Error Fetching All Company",
+            message: "Error Fetching All Product",
             error,
           });
         });
     } catch (error) {
+      console.log(error)
       return res.status(400).json({
         success: false,
         status: 400,
-        message: "Error Fetching All Company",
+        message: "Error Fetching All Product",
         error,
       });
     }
   }
+
   
+    async updateProduct(req, res, next) {
+      try {
+        console.log(req.body);
+        Product.updateOne({_id: req.params.id}, {...req.body}).then(response => {
+            return res.status(200).json({
+              success: true,
+              status: 200,
+              message: "Product updated successfully",
+              data: response,
+            });
+        }).catch(error => {
+          console.log(error);
+          return res.status(400).json({
+            success: false,
+            status: 400,
+            message: "Error updating Product",
+            error,
+          });
+        })
+      } catch (error) {
+        return res.status(400).json({
+          success: false,
+          status: 400,
+          message: "Error updating Product",
+          error,
+        });
+      }
+    }
 
 
 
