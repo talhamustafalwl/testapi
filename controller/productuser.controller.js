@@ -1,4 +1,5 @@
 const { ProductUser } = require("../model/ProductUser");
+const { Product } = require("../model/Product");
 
 class ProductUserController {
   constructor() {}
@@ -41,7 +42,14 @@ class ProductUserController {
       console.log('adding Product User---');
       new ProductUser({...req.body})
         .save()
-        .then((response) => {
+        .then(async(response) => {
+          await Product.updateMany({},{ $set:{addedToCart:false}})
+          req.body.productId.map(obj=> 
+            Product.updateOne({_id: obj._id}, {$inc: {quantity: -obj.quantity}}).then(resultDone => {
+              console.log(resultDone)
+            }))
+         
+
           return res.status(200).json({
             success: true,
             status: 200,

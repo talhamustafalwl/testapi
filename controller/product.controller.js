@@ -49,7 +49,7 @@ class ProductController {
             return res.status(200).json({
               success: true,
               status: 200,
-              message: "Product updated successfully",
+              message: "Product Added to cart successfully",
               data: response,
             });
         }).catch(error => {
