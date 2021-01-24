@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-// const cors = require('cors');
+const cors = require('cors');
 const routes = require("./routes");
 
 mongoose.set('useCreateIndex', true);
@@ -23,7 +23,7 @@ Object.defineProperty(Array.prototype, 'flat', {
     }
 });
 
-// app.use(cors());
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
